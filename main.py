@@ -24,7 +24,6 @@ crunch_sound = pygame.mixer.Sound("sound/crunch.wav")
 # Colors
 LAWNGREEN = (175, 227, 73)
 DIMMED_LAWNGREEN = (168, 222, 65)
-BLUE = (0, 0, 255)
 
 # Creating the Class for the Fruit
 class FRUIT:
@@ -96,14 +95,14 @@ class SNAKE:
 
     # Creating the Function to Draw the Snake on the Screen
     def draw_snake(self):
-        # Calling the Function to Update the Snake Body Part Graphics
+        # Calling the Functions to Update the Snake Body Part Graphics
         self.update_head_graphics()
         self.update_tail_graphics()
         
         for index, each_block in enumerate(self.snake_body):
             snake_rect = pygame.Rect(int(each_block.x * box_size), int(each_block.y * box_size), box_size, box_size)
-            pygame.draw.rect(screen, BLUE, snake_rect)
 
+            # Creating the Conditions to Draw the Snake Body Graphics
             if index == 0:
                 screen.blit(self.head, snake_rect)
             elif index == len(self.snake_body) - 1:
