@@ -24,7 +24,6 @@ crunch_sound = pygame.mixer.Sound("sound/crunch.wav")
 # Colors
 LAWNGREEN = (175, 227, 73)
 DIMMED_LAWNGREEN = (168, 222, 65)
-RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
 # Creating the Class for the Fruit
