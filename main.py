@@ -102,11 +102,18 @@ class SNAKE:
         for index, each_block in enumerate(self.snake_body):
             snake_rect = pygame.Rect(int(each_block.x * box_size), int(each_block.y * box_size), box_size, box_size)
 
-            # Creating the Conditions to Draw the Snake Body Graphics
+            # Creating the Conditions to Draw the Snake Head and Tail
             if index == 0:
                 screen.blit(self.head, snake_rect)
             elif index == len(self.snake_body) - 1:
                 screen.blit(self.tail, snake_rect)
+            # Creating the Condition to Draw the Snake Body 
+            else:
+                next_block = self.snake_body[index + 1] - each_block
+                previous_block = self.snake_body[index - 1] - each_block
+
+                if next_block.x == previous_block.x : screen.blit(self.body_vertical, snake_rect)
+                if next_block.y == previous_block.y : screen.blit(self.body_horizontal, snake_rect)
 
     # Creating the Function to Update the Head Graphics
     def update_head_graphics(self):
