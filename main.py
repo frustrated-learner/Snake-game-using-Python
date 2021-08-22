@@ -86,7 +86,7 @@ class SNAKE:
         self.body_horizontal = pygame.image.load("img/body_horizontal.png").convert_alpha()
         self.body_vertical = pygame.image.load("img/body_vertical.png").convert_alpha()
 
-        # Importing the Body Turning Graphics
+        # Importing the Body Corner Graphics
         self.body_bl = pygame.image.load("img/body_bl.png").convert_alpha()
         self.body_br = pygame.image.load("img/body_br.png").convert_alpha()
         self.body_tl = pygame.image.load("img/body_tl.png").convert_alpha()
@@ -107,11 +107,11 @@ class SNAKE:
                 screen.blit(self.head, snake_rect)
             elif index == len(self.snake_body) - 1:
                 screen.blit(self.tail, snake_rect)
+                
             # Creating the Condition to Draw the Snake Body 
             else:
                 next_block = self.snake_body[index + 1] - each_block
                 previous_block = self.snake_body[index - 1] - each_block
-
                 if next_block.x == previous_block.x : screen.blit(self.body_vertical, snake_rect)
                 if next_block.y == previous_block.y : screen.blit(self.body_horizontal, snake_rect)
 
