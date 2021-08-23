@@ -115,7 +115,7 @@ class SNAKE:
                 if next_block.x == previous_block.x : screen.blit(self.body_vertical, snake_rect)
                 if next_block.y == previous_block.y : screen.blit(self.body_horizontal, snake_rect)
 
-                # Creating the Condition to Draw the Snake Body corners
+                # Creating the Condition to Draw the Snake Body Corners
                 else:
                     if next_block.x == 1 and previous_block.y == 1 or next_block.y == 1 and previous_block.x == 1: 
                         screen.blit(self.body_br, snake_rect)
