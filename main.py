@@ -22,8 +22,8 @@ clock = pygame.time.Clock()
 crunch_sound = pygame.mixer.Sound("sound/crunch.wav")
 
 # Colors
-LAWNGREEN = (175, 227, 73)
-DIMMED_LAWNGREEN = (168, 222, 65)
+GRASS = (175, 227, 73)
+DIMMED_GRASS = (168, 222, 65)
 
 # Creating the Class for the Fruit
 class FRUIT:
@@ -162,6 +162,7 @@ class MAIN:
 
     # Creating the Function to Draw elements on the Screen
     def draw_element(self):
+        self.draw_grass_checkboard()
         self.fruit.draw_fruit()
         self.snake.draw_snake()
         self.check_collision()
@@ -197,6 +198,20 @@ class MAIN:
             if self.snake.snake_body[0] == any_block:
                 running = False
 
+    # Creating the Function to Draw the Grass checkboard on the Screen
+    def draw_grass_checkboard(self):
+        for row in range(box_number):
+            if row % 2 == 0:
+                for column in range(box_number):
+                    if column % 2 == 0:
+                        grass_rect = pygame.Rect(column * box_size, row * box_size, box_size, box_size)
+                        pygame.draw.rect(screen, DIMMED_GRASS, grass_rect)
+            else:
+                for column in range(box_number):
+                    if column % 2 != 0:
+                        grass_rect = pygame.Rect(column * box_size, row * box_size, box_size, box_size)
+                        pygame.draw.rect(screen, DIMMED_GRASS, grass_rect)
+
 
 # Assigning the Classes
 main_game = MAIN()
@@ -231,7 +246,7 @@ while running:
                     main_game.snake.direction = Vector2(1, 0)
 
     # Filling the Screen With Colors
-    screen.fill(LAWNGREEN)
+    screen.fill(GRASS)
     
     # Calling the Function to Draw elements on the Screen
     main_game.draw_element()
