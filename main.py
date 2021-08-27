@@ -173,7 +173,7 @@ class MAIN:
         # Importing the Welcome Screen
         self.welcome_screen = pygame.image.load("img/welcome_screen.png").convert_alpha()
         self.welcome_screen_x = 170
-        self.welcome_screen_y = 330
+        self.welcome_screen_y = 310
 
         # Drawing the Welcome Screen on the Screen
         screen.blit(self.welcome_screen, (self.welcome_screen_x, self.welcome_screen_y))
@@ -222,7 +222,7 @@ class MAIN:
     def draw_game_over_screen(self):
         self.game_over_screen = pygame.image.load("img/game_over.png").convert_alpha()
         self.game_over_screen_x = 170
-        self.game_over_screen_y = 330
+        self.game_over_screen_y = 310
 
         # Drawing the Game Over Screen on the Screen
         screen.blit(self.game_over_screen, (self.game_over_screen_x, self.game_over_screen_y))
