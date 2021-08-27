@@ -24,6 +24,9 @@ crunch_sound = pygame.mixer.Sound("sound/crunch.wav")
 # Importing the Score Font
 font = pygame.font.Font("font/font.ttf", 25)
 
+# Creating the Staring and Game active Variables
+GAME_ACTIVE = False
+
 # Colors
 GRASS = (175, 227, 73)
 DIMMED_GRASS = (168, 222, 65)
@@ -258,10 +261,13 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         # Using the Userevent to Call the Snake move Function
-        if event.type == SNAKE_MOVE:
+        if event.type == SNAKE_MOVE and GAME_ACTIVE == True:
             main_game.snake.move_snake()
         # Creating the Snake Movement Keys
         if event.type == pygame.KEYDOWN:
+            # Creating the Key to Start the Game
+            if event.key == pygame.K_SPACE:
+                GAME_ACTIVE = True
             # Creating the Condition for the Snake not to Reverse its Direction
             if event.key == pygame.K_UP or event.key == pygame.K_w:
                 if main_game.snake.direction.y != 1:
@@ -279,8 +285,10 @@ while running:
     # Filling the Screen With Colors
     screen.fill(GRASS)
     
-    # Calling the Function to Draw elements on the Screen
-    main_game.draw_element()
+    # Checking the Game is Active or Not
+    if GAME_ACTIVE == True:
+        # Calling the Function to Draw elements on the Screen
+        main_game.draw_element()
     
     # Updating the Display
     pygame.display.update()
