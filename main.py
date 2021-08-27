@@ -18,12 +18,16 @@ pygame.display.set_caption("Snake")
 running = True
 clock = pygame.time.Clock()
 
-# Importing Some Sound Variables
+# Importing The Sounds
 crunch_sound = pygame.mixer.Sound("sound/crunch.wav")
+
+# Importing the Score Font
+font = pygame.font.Font("font/font.ttf", 25)
 
 # Colors
 GRASS = (175, 227, 73)
 DIMMED_GRASS = (168, 222, 65)
+BLACK = (0, 0, 0)
 
 # Creating the Class for the Fruit
 class FRUIT:
@@ -168,6 +172,7 @@ class MAIN:
         self.check_collision()
         self.no_spawning_on_snake_body()
         self.game_over()
+        self.draw_score()
 
     # Creating the Function to Update the Screen
     def update_screen(self):
@@ -211,6 +216,32 @@ class MAIN:
                     if column % 2 != 0:
                         grass_rect = pygame.Rect(column * box_size, row * box_size, box_size, box_size)
                         pygame.draw.rect(screen, DIMMED_GRASS, grass_rect)
+
+    # Creating the Function to Draw the Score on the Screen
+    def draw_score(self):
+        # Creating the Variables for the Score
+        self.score_value = str(len(self.snake.snake_body) - 3)
+        self.score_x = box_number * box_size - 40
+        self.score_y = box_number * box_size - 40
+
+        # Creating the Variables for the Fruit
+        self.fruit_x = box_number * box_size - 70
+        self.fruit_y = box_number * box_size - 40
+
+        # Creating a Background rect for the  Score
+        bg_rect = pygame.Rect((self.fruit_x - 22), (self.score_y - 20), (box_size * 2 - 10), (box_size))
+        pygame.draw.rect(screen, GRASS, bg_rect)
+        pygame.draw.rect(screen, BLACK, bg_rect, 2)
+
+        # Rendering the Score
+        self.score_surface = font.render(self.score_value, True, BLACK)
+        self.score_rect = self.score_surface.get_rect(center = (self.score_x, self.score_y))
+        screen.blit(self.score_surface, self.score_rect)
+
+        # Rendering the Fruit
+        self.fruit_surface = self.fruit.fruit_list[0]
+        self.fruit_rect = self.fruit_surface.get_rect(center = (self.fruit_x, self.fruit_y))
+        screen.blit(self.fruit_surface, self.fruit_rect)
 
 
 # Assigning the Classes
