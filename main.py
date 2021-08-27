@@ -24,8 +24,9 @@ crunch_sound = pygame.mixer.Sound("sound/crunch.wav")
 # Importing the Score Font
 font = pygame.font.Font("font/font.ttf", 25)
 
-# Creating the Staring and Game active Variables
+# Creating the Game active Variables
 GAME_ACTIVE = False
+GAME_OVER = False
 
 # Colors
 GRASS = (175, 227, 73)
@@ -167,8 +168,19 @@ class MAIN:
         self.fruit = FRUIT()
         self.snake = SNAKE()
 
+    # Creating the Function to Add the Welcome Screen
+    def draw_welcome_screen(self):
+        # Importing the Welcome Screen
+        self.welcome_screen = pygame.image.load("img/welcome_screen.png").convert_alpha()
+        self.welcome_screen_x = 170
+        self.welcome_screen_y = 330
+
+        # Drawing the Welcome Screen on the Screen
+        screen.blit(self.welcome_screen, (self.welcome_screen_x, self.welcome_screen_y))
+
     # Creating the Function to Draw elements on the Screen
     def draw_element(self):
+        global GAME_OVER
         self.draw_grass_checkboard()
         self.fruit.draw_fruit()
         self.snake.draw_snake()
@@ -176,7 +188,7 @@ class MAIN:
         self.no_spawning_on_snake_body()
         self.game_over()
         self.draw_score()
-
+        
     # Creating the Function to Update the Screen
     def update_screen(self):
         self.snake.move_snake()
@@ -196,15 +208,24 @@ class MAIN:
             
     # Creating the Function to Over the Game
     def game_over(self):
-        global running
+        global GAME_OVER
         # Overing the Game after hitting the Game Boundary
         if not 0 <= self.snake.snake_body[0].x < box_number or not 0 <= self.snake.snake_body[0].y < box_number:
-            running = False
+            GAME_OVER = True
             
         # Overing the Game hitting Own body
         for any_block in self.snake.snake_body[1:]:
             if self.snake.snake_body[0] == any_block:
-                running = False
+                GAME_OVER = True
+    
+    # Creating the Function to Draw the Game over Screen
+    def draw_game_over_screen(self):
+        self.game_over_screen = pygame.image.load("img/game_over.png").convert_alpha()
+        self.game_over_screen_x = 170
+        self.game_over_screen_y = 330
+
+        # Drawing the Game Over Screen on the Screen
+        screen.blit(self.game_over_screen, (self.game_over_screen_x, self.game_over_screen_y))
 
     # Creating the Function to Draw the Grass checkboard on the Screen
     def draw_grass_checkboard(self):
@@ -261,7 +282,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         # Using the Userevent to Call the Snake move Function
-        if event.type == SNAKE_MOVE and GAME_ACTIVE == True:
+        if event.type == SNAKE_MOVE and GAME_ACTIVE == True and GAME_OVER == False:
             main_game.snake.move_snake()
         # Creating the Snake Movement Keys
         if event.type == pygame.KEYDOWN:
@@ -281,12 +302,24 @@ while running:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 if main_game.snake.direction.x != -1:
                     main_game.snake.direction = Vector2(1, 0)
+            # Creating the Game restarting key
+            if GAME_OVER == True:
+                if event.key == pygame.K_SPACE:
+                    GAME_OVER = False
+                    main_game.snake.snake_body = [Vector2(6, 9), Vector2(5, 9), Vector2(4, 9)]
+                    main_game.snake.direction = Vector2(1, 0)
 
     # Filling the Screen With Colors
     screen.fill(GRASS)
     
     # Checking the Game is Active or Not
-    if GAME_ACTIVE == True:
+    if GAME_ACTIVE == False:
+        # Calling the Function to Draw the Welcome Screen
+        main_game.draw_welcome_screen()
+    elif GAME_OVER == True:
+        # Calling the Function to Draw the Game over Screen
+        main_game.draw_game_over_screen()
+    else:
         # Calling the Function to Draw elements on the Screen
         main_game.draw_element()
     
