@@ -32,6 +32,7 @@ GAME_OVER = False
 GRASS = (175, 227, 73)
 DIMMED_GRASS = (168, 222, 65)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 # Creating the Class for the Fruit
 class FRUIT:
@@ -267,6 +268,18 @@ class MAIN:
         self.fruit_rect = self.fruit_surface.get_rect(center = (self.fruit_x, self.fruit_y))
         screen.blit(self.fruit_surface, self.fruit_rect)
 
+    # Creating the Function to Show to the Score after Game Over
+    def show_you_scored(self):
+        font = pygame.font.Font("font/font.ttf", 40)
+        
+        self.you_scored = str("You scored : " + self.score_value)
+        self.you_scored_x = 260
+        self.you_scored_y = 450
+
+        # Rendering the You Scored
+        self.you_scored_surface = font.render(self.you_scored, True, RED)
+        screen.blit(self.you_scored_surface, (self.you_scored_x, self.you_scored_y))
+
 
 # Assigning the Classes
 main_game = MAIN()
@@ -324,6 +337,7 @@ while running:
     elif GAME_OVER == True:
         # Calling the Function to Draw the Game over Screen
         main_game.draw_game_over_screen()
+        main_game.show_you_scored()
     else:
         # Calling the Function to Draw elements on the Screen
         main_game.draw_element()
