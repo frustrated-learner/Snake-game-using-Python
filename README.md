@@ -14,9 +14,9 @@ I made a Snake game using the pygame module Python
 3. Press "Spacebar" to Restart the Game after the Game is Over
 
 ## `Screenshots`
-<img src="screenshots/welcome_screen.png" alt="welcome_screen">
-<img src="screenshots/gameplay_01.png" alt="gameplay">
-<img src="screenshots/gameplay_02.png" alt="gameplay">
-<img src="screenshots/gameplay_03.png" alt="gameplay">
-<img src="screenshots/gameplay_04.png" alt="gameplay">
-<img src="screenshots/game_over.png" alt="game_over">
+<img src="screenshots/welcome_screen.png" alt="welcome_screen" width="400px">
+<img src="screenshots/gameplay_01.png" alt="gameplay" width="400px">
+<img src="screenshots/gameplay_02.png" alt="gameplay" width="400px">
+<img src="screenshots/gameplay_03.png" alt="gameplay" width="400px">
+<img src="screenshots/gameplay_04.png" alt="gameplay" width="400px">
+<img src="screenshots/game_over.png" alt="game_over" width="400px">
