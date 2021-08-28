@@ -306,8 +306,12 @@ while running:
             if GAME_OVER == True:
                 if event.key == pygame.K_SPACE:
                     GAME_OVER = False
+                    main_game.fruit.position == main_game.snake.snake_body[0]
                     main_game.snake.snake_body = [Vector2(6, 9), Vector2(5, 9), Vector2(4, 9)]
-                    main_game.snake.direction = Vector2(1, 0)
+                    main_game.fruit.x = random.randint(0, box_number - 1)
+                    main_game.fruit.y = random.randint(0, box_number - 1)
+                    main_game.fruit.position = Vector2(main_game.fruit.x , main_game.fruit.y)
+                    main_game.fruit.fruit = random.choice(main_game.fruit.fruit_list)
 
     # Filling the Screen With Colors
     screen.fill(GRASS)
