@@ -280,6 +280,18 @@ class MAIN:
         self.you_scored_surface = font.render(self.you_scored, True, RED)
         screen.blit(self.you_scored_surface, (self.you_scored_x, self.you_scored_y))
 
+    # Creating the Function to Reset the Snake, Fruit Position after the Game Over
+    def reset_everything(self):
+        global GAME_OVER
+        GAME_OVER = False
+        self.fruit.position == main_game.snake.snake_body[0]
+        self.snake.snake_body = [Vector2(6, 9), Vector2(5, 9), Vector2(4, 9)]
+        self.snake.direction = Vector2(1, 0)
+        self.fruit.x = random.randint(0, box_number - 1)
+        self.fruit.y = random.randint(0, box_number - 1)
+        self.fruit.position = Vector2(main_game.fruit.x , main_game.fruit.y)
+        self.fruit.fruit = random.choice(main_game.fruit.fruit_list)
+
 
 # Assigning the Classes
 main_game = MAIN()
@@ -318,14 +330,8 @@ while running:
             # Creating the Game restarting key
             if GAME_OVER == True:
                 if event.key == pygame.K_SPACE:
-                    GAME_OVER = False
-                    main_game.fruit.position == main_game.snake.snake_body[0]
-                    main_game.snake.snake_body = [Vector2(6, 9), Vector2(5, 9), Vector2(4, 9)]
-                    main_game.snake.direction = Vector2(1, 0)
-                    main_game.fruit.x = random.randint(0, box_number - 1)
-                    main_game.fruit.y = random.randint(0, box_number - 1)
-                    main_game.fruit.position = Vector2(main_game.fruit.x , main_game.fruit.y)
-                    main_game.fruit.fruit = random.choice(main_game.fruit.fruit_list)
+                    main_game.reset_everything()
+                    
 
     # Filling the Screen With Colors
     screen.fill(GRASS)
